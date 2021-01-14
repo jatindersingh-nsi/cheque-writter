@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, render_template, request
 from num2words import num2words
 import decimal
@@ -23,4 +24,5 @@ def create_cheque():
 
 
 if __name__ == "__main__":
+    time.sleep(21)
     app.run(host="0.0.0.0", port=5001, debug=False)
