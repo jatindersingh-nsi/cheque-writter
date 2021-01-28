@@ -1,7 +1,7 @@
 """
 `params['project_url']` will be returned after deploying the application in docker container. So this will be
 available in the params parameter in every function and class methods. For E2E testing, Chrome browser driver path is
-available in `params['driver_path']`. See below, are examples to write test cases.
+available in `params['driver_remote_url']`. See below, are examples to write test cases.
 
 1. Method based
 def test_add_to_cart(params):
@@ -16,7 +16,7 @@ def test_add_to_cart(params):
 class Test:
     def test_add_to_cart(self, params):
         project_url = params['project_url']
-        driver_path = params['driver_path']
+        driver_remote_url = params['driver_remote_url']
         # ...
         # Your code goes here
         # ...
@@ -28,9 +28,7 @@ todo: need to check this on server
 """
 import requests
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-HEADLESS = False
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def test_home_page_worked(params):
@@ -49,10 +47,8 @@ def test_cheque_created(params):
     Test cheque created
     """
     project_url = params['project_url']
-    driver_path = params['driver_path']
-    options = Options()
-    options.headless = HEADLESS
-    driver = webdriver.Chrome(driver_path, options=options)
+    driver_remote_url = params['driver_remote_url']
+    driver = webdriver.Remote(driver_remote_url, DesiredCapabilities.CHROME)
     driver.get(project_url)
     driver.find_element_by_name('amount').send_keys('200')
     driver.find_element_by_name('submit').click()
@@ -66,10 +62,8 @@ def test_cheque_created_with_fraction_amount(params):
     Test cheque created
     """
     project_url = params['project_url']
-    driver_path = params['driver_path']
-    options = Options()
-    options.headless = HEADLESS
-    driver = webdriver.Chrome(driver_path, options=options)
+    driver_remote_url = params['driver_remote_url']
+    driver = webdriver.Remote(driver_remote_url, DesiredCapabilities.CHROME)
     driver.get(project_url)
     driver.find_element_by_name('amount').send_keys('126.23')
     driver.find_element_by_name('submit').click()
