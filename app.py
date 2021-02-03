@@ -17,7 +17,7 @@ def create_cheque():
     in_words = request.form['automation-amount']
     try:
         in_words = num2words(in_words).replace('-', ' ')
-        #in_words = in_words.title()
+        in_words = in_words.title()
     except (ValueError, decimal.InvalidOperation):
         return render_template('error.html')
     return render_template('cheque.html', result={'amount': request.form['automation-amount'], 'in_words': in_words})
