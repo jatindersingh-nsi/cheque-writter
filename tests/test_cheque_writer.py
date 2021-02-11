@@ -50,8 +50,8 @@ def test_cheque_created(params):
     driver_remote_url = params['driver_remote_url']
     driver = webdriver.Remote(driver_remote_url, DesiredCapabilities.CHROME)
     driver.get(project_url)
-    driver.find_element_by_name('automation-amount').send_keys('200')
-    driver.find_element_by_name('automation-submit').click()
+    driver.find_element_by_class_name('automation-amount').send_keys('200')
+    driver.find_element_by_class_name('automation-submit').click()
     page_html = driver.page_source
     driver.close()
     assert "Two Hundred" in page_html
@@ -65,8 +65,8 @@ def test_cheque_created_with_fraction_amount(params):
     driver_remote_url = params['driver_remote_url']
     driver = webdriver.Remote(driver_remote_url, DesiredCapabilities.CHROME)
     driver.get(project_url)
-    driver.find_element_by_name('automation-amount').send_keys('126.23')
-    driver.find_element_by_name('automation-submit').click()
+    driver.find_element_by_class_name('automation-amount').send_keys('126.23')
+    driver.find_element_by_class_name('automation-submit').click()
     page_html = driver.page_source
     driver.close()
     assert "One Hundred And Twenty Six Point Two Three" in page_html
